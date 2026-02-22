@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Advanced Cartoon AI Chatbot</title>
+
+<style>
+body {
+    margin: 0;
+    height: 100vh;
+    font-family: 'Comic Sans MS', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-size: cover;
+    background-position: center;
+    transition: background-image 1.2s ease-in-out;
+    overflow: hidden;
+}
+
+/* Slight dark overlay for readability */
+body::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.25);
+    z-index: 0;
+}
+
+/* Chat container centered */
+#chat-wrapper {
+    width: 50%;
+    min-width: 400px;
+    max-width: 800px;
+    height: 70%;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(10px);
+    border-radius: 30px;
+    box-shadow: 0 30px 70px rgba(0,0,0,0.6);
+    display: flex;
+    flex-direction: column;
+    padding: 25px;
+    z-index: 1;
+    position: relative;
+}
+
+/* Clear button outside look */
+#clear-btn {
+    position: absolute;
+    top: -15px;
+    right: -15px;
+    padding: 10px 18px;
+    background: #ff4d4d;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+    transition: transform 0.2s;
+}
+#clear-btn:hover {
+    transform: scale(1.1);
+}
+
+#messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 10px;
+    margin-bottom: 15px;
+}
+
+.message {
+    padding: 12px 18px;
+    border-radius: 25px;
+    margin-bottom: 12px;
+    max-width: 75%;
+    word-wrap: break-word;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.user {
+    background: #ffd966;
+    align-self: flex-end;
+}
+
+.bot {
+    background: #6fa8dc;
+    color: white;
+    align-self: flex-start;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+#input-box {
+    display: flex;
+}
+
+#input-box input {
+    flex: 1;
+    padding: 14px;
+    border-radius: 20px 0 0 20px;
+    border: 2px solid #0078d4;
+    font-size: 16px;
+    outline: none;
+}
+
+#input-box button {
+    padding: 14px 20px;
+    border: none;
+    border-radius: 0 20px 20px 0;
+    background: #ff8c00;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+#input-box button:hover {
+    background: #ff6600;
+}
+</style>
+</head>
+
+<body>
+
+<div id="chat-wrapper">
+    <button id="clear-btn" onclick="clearMemory()">Clear</button>
+    <div id="messages"></div>
+    <div id="input-box">
+        <input id="user-input" placeholder="Ask me anything..." />
+        <button onclick="sendMessage()">Send</button>
+    </div>
+</div>
+
+<script>
+const messagesDiv = document.getElementById("messages");
+const apiKey = "dev-secret-key";
+
+/* Local backgrounds */
+const backgrounds = [
+    "/static/backgrounds/bg1.jpg",
+    "/static/backgrounds/bg2.jpg",
+    "/static/backgrounds/bg3.jpg",
+    "/static/backgrounds/bg4.jpg",
+    "/static/backgrounds/bg5.jpg",
+    "/static/backgrounds/bg6.jpg",
+    "/static/backgrounds/bg7.jpg",
+    "/static/backgrounds/bg8.jpg",
+];
+
+let bgIndex = 0;
+
+/* Rotate every 5 seconds */
+setInterval(() => {
+    bgIndex = (bgIndex + 1) % backgrounds.length;
+    document.body.style.backgroundImage = `url('${backgrounds[bgIndex]}')`;
+}, 5000);
+
+/* Initial background */
+document.body.style.backgroundImage = `url('${backgrounds[bgIndex]}')`;
+
+function addMessage(text, sender) {
+    const msgDiv = document.createElement("div");
+    msgDiv.classList.add("message", sender);
+    msgDiv.textContent = text;
+    messagesDiv.appendChild(msgDiv);
+    messagesDiv.scrollTop = messagesDiv.scrollHeight;
+}
+
+async function sendMessage() {
+    const input = document.getElementById("user-input");
+    const text = input.value.trim();
+    if (!text) return;
+
+    addMessage(text, "user");
+    input.value = "";
+
+    try {
+        const res = await fetch("/estimate", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "x-api-key": apiKey
+            },
+            body: JSON.stringify({
+                prompt: text,
+                max_completion_tokens: 256
+            })
+        });
+
+        const data = await res.json();
+        addMessage(data.response, "bot");
+
+    } catch (err) {
+        addMessage("Server error.", "bot");
+    }
+}
+
+async function clearMemory() {
+    try {
+        await fetch("/clear", {
+            method: "POST",
+            headers: { "x-api-key": apiKey }
+        });
+
+        messagesDiv.innerHTML = "";
+        addMessage("Memory cleared. Start fresh.", "bot");
+
+    } catch (err) {
+        addMessage("Error clearing memory.", "bot");
+    }
+}
+</script>
+
+</body>
+</html>

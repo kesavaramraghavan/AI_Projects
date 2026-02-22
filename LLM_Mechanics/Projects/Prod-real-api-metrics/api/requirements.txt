@@ -1,0 +1,8 @@
+fastapi
+uvicorn[standard]
+requests
+tiktoken
+redis
+prometheus-client
+python-dotenv
+openai

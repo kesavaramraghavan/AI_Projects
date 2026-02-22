@@ -1,0 +1,11 @@
+groups:
+  - name: llm_alerts
+    rules:
+      - alert: HighUserBudget
+        expr: llm_user_budget{user="*"} > 1.0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "High budget for user {{ $labels.user }}"
+          description: "User {{ $labels.user }} has accumulated > $1.0 estimated cost."
