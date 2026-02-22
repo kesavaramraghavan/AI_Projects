@@ -1,0 +1,10 @@
+fastapi
+uvicorn
+tiktoken
+pydantic
+pytest
+prometheus-client
+slowapi
+redis
+python-dotenv
+prometheus_client
