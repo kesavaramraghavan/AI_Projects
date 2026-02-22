@@ -35,7 +35,7 @@ By understanding this, you’ll avoid surprises like truncated prompts or unexpe
 1. Open terminal and navigate to the folder:
 
 ```bash
-cd examples/1_minimal_token_count
+cd Projects/1_minimal_token_count
 ```
 
 2. Run the main example:
