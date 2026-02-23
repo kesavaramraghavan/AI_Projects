@@ -2,7 +2,7 @@
 **Creating AI Projects**
 
 **LLM Mechanics**
-I created **LLM Mechanics** as a hands-on space to understand how LLM systems behave in real apps—especially around context windows, token efficiency, and production API reliability—so you can design faster, cheaper, and more dependable AI workflows.
+I created **LLM Mechanics** as a hands-on space to understand how LLM systems behave in real apps - especially around context windows, token efficiency, and production API reliability so you can design faster, cheaper, and more dependable AI workflows.
 
 Projects included:
 - [Context_Limit](https://github.com/kesavaramraghavan/AI_Projects/tree/main/LLM_Mechanics/Projects/Context_Limit) — explores context window limits and practical handling patterns.
