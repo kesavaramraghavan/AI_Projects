@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Log Intelligence Demo</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main>
+    <h1>Log Intelligence & RCA Demo</h1>
+
+    <section>
+      <h2>Log Search</h2>
+      <input id="searchText" placeholder="Search text (e.g. timeout)" />
+      <input id="searchService" placeholder="Service (e.g. checkout-api)" />
+      <button id="searchBtn">Search</button>
+      <pre id="logsOutput"></pre>
+    </section>
+
+    <section>
+      <h2>RCA</h2>
+      <input id="rcaQuestion" placeholder="Describe the incident (e.g. checkout failing)"/>
+      <button id="rcaBtn">Analyze</button>
+      <pre id="rcaOutput"></pre>
+    </section>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
