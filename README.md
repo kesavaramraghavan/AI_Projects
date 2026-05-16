@@ -30,3 +30,11 @@ Projects included:
 [log_agent](https://github.com/kesavaramraghavan/AI_Projects/tree/main/log_agent) - Kafka-to-Elasticsearch log pipeline with a heuristic RCA API and web UI.
 
 -----------------------------------------------------------------------------------------------
+
+Sentiment Intelligence API
+
+A FastAPI-based ML system that classifies text into positive, negative, and neutral sentiments using TF-IDF features with a calibrated linear model, supporting real-time and batch inference with production-style logging, model persistence, and retraining capability.
+
+[Sentiment API](https://github.com/kesavaramraghavan/AI_Projects/tree/main/Sentiment_API) - Includes structured pipelines for training, evaluation, and inference with safe artifact versioning, API key–protected retraining, and optimized batch prediction for low-latency deployment.
+
+-----------------------------------------------------------------------------------------------
