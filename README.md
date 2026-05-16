@@ -31,10 +31,18 @@ Projects included:
 
 -----------------------------------------------------------------------------------------------
 
-Sentiment Intelligence API
+**Sentiment Intelligence API**
 
 A FastAPI-based ML system that classifies text into positive, negative, and neutral sentiments using TF-IDF features with a calibrated linear model, supporting real-time and batch inference with production-style logging, model persistence, and retraining capability.
 
 [Sentiment API](https://github.com/kesavaramraghavan/AI_Projects/tree/main/Sentiment_API) - Includes structured pipelines for training, evaluation, and inference with safe artifact versioning, API key–protected retraining, and optimized batch prediction for low-latency deployment.
 
 -----------------------------------------------------------------------------------------------
+
+**Support Ticket Classifier API**
+
+A FastAPI-based ML system that automatically categorizes customer support tickets into 6 departments (billing, technical, account, shipping, returns, general) and assigns priority levels (P1–P4) using TF-IDF features with dual XGBoost classifiers, supporting real-time and batch inference with intelligent queue routing and auto-escalation for critical issues.
+[Ticket Classifier API](https://github.com/kesavaramraghavan/AI_Projects/tree/main/Support_ticket_classifier) - Includes a self-training pipeline that bootstraps from built-in seed data on first launch, dual-model evaluation with accuracy and F1 scoring, automatic artifact persistence, and smart queue assignment that prefixes ESCALATION- for P1-critical tickets.
+
+-----------------------------------------------------------------------------------------------
+
